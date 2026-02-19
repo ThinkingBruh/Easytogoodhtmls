@@ -45,16 +45,26 @@ const App = () => {
           <AnimatePresence mode='popLayout'>
             {filteredGames.length > 0 ? (
               filteredGames.map((game) => (
-                <GameCard
+                <motion.div
                   key={game.id}
-                  game={game}
-                  onClick={setSelectedGame}
-                />
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <GameCard
+                    game={game}
+                    onClick={setSelectedGame}
+                  />
+                </motion.div>
               ))
             ) : (
               <motion.div 
+                key="no-games"
                 initial={{ opacity: 0 }} 
                 animate={{ opacity: 1 }} 
+                exit={{ opacity: 0 }}
                 className="col-span-full text-center py-32 text-gray-600"
               >
                 <p className="text-2xl font-light mb-4">No games found.</p>
@@ -76,11 +86,19 @@ const App = () => {
       {/* Modals */}
       <AnimatePresence>
         {selectedGame && (
-          <GameModal
-            key="modal"
-            game={selectedGame}
-            onClose={() => setSelectedGame(null)}
-          />
+          <motion.div
+            key="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+            onClick={() => setSelectedGame(null)}
+          >
+            <GameModal
+              game={selectedGame}
+              onClose={() => setSelectedGame(null)}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 

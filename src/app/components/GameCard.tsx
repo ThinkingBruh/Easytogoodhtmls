@@ -7,7 +7,6 @@ import { Game } from '../../data/mockGames';
 interface GameCardProps {
   game: Game;
   onClick: (game: Game) => void;
-  // isAdminMode removed from usage
 }
 
 export const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
@@ -15,7 +14,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="group relative bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden cursor-pointer hover:shadow-red-900/50 transition-all duration-300 transform"
+      className="group relative bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden cursor-pointer hover:shadow-red-900/50 transition-all duration-300 transform h-full"
       onClick={() => onClick(game)}
     >
       <div className="aspect-w-16 aspect-h-12 w-full h-40 bg-gray-900 relative overflow-hidden">
